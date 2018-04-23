@@ -301,7 +301,9 @@ respect to the window first line"
  "Call magit-blame on current revision."
  (interactive)
  (if (fboundp 'magit-blame)
-  (magit-blame (car git-timemachine-revision) (buffer-file-name))
+     (let ((magit-buffer-revision (car git-timemachine-revision))
+           (magit-buffer-file-name (buffer-file-name)))
+       (magit-blame))
   (message "You need to install magit for blame capabilities")))
 
 (defun git-timemachine-kill-revision ()
